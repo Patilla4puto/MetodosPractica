@@ -1,7 +1,11 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-def polinomiosLagrange (x,list):
+from sympy import *
+
+x = symbols('x')
+
+def polinomiosLagrange (list):
     result = []
     for i in range(len(list)):
         l_i =  1
@@ -11,11 +15,11 @@ def polinomiosLagrange (x,list):
             l_i = l_i*(x-list[j])/(list[i]-list[j])
         result.append(l_i)
     return result
-def polinomiosInterpoladores(x,list_x,f):
-    p_Lagrange = polinomiosLagrange(x,list_x)
+def polinomiosInterpoladores(list_x,f):
+    p_Lagrange = polinomiosLagrange(list_x)
     p_inter_n =0
     for i in range(len(list_x)):
-        p_inter_n  += f(list_x[i])*p_Lagrange[i]
+        p_inter_n  += f.subs({'x':list_x[i]})*p_Lagrange[i]
     return p_inter_n
 interval = [0,math.pi/4]
 def plotPolLagrange():
@@ -33,9 +37,9 @@ def plotPolInter():
     polinomios_Int = []
     x_axis = np.arange(0, math.pi / 4, math.pi / 400)
     for i in x_axis:
-        polinomios_Int.append(polinomiosInterpoladores(i, interval,lambda x:math.sin(3*x)))
+        polinomios_Int.append(polinomiosInterpoladores(i, interval,sin(3*x)))
     print(polinomios_Int)
     plt.plot(x_axis, polinomios_Int, label="Polinomio Interpolador")
 plotPolInter()
 plt.show()
-print(polinomiosInterpoladores(math.pi/8,[0,math.pi/4],lambda x:math.sin(3*x)))
+#print(polinomiosInterpoladores(interval,sin(3*x)))
