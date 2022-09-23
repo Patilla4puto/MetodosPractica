@@ -1,17 +1,19 @@
 import numpy as np
 import math
-import matplotlib.pyplot as plt
-from sympy import *
 
-x = symbols('x')
+from sympy import *
+from sympy.plotting import plot
+x = symbols('x ')
 
 def polinomiosLagrange (list):
     result = []
+
     for i in range(len(list)):
         l_i =  1
         for j in range(len(list) ):
             if j == i :
                 continue
+
             l_i = l_i*(x-list[j])/(list[i]-list[j])
         result.append(l_i)
     return result
@@ -21,25 +23,42 @@ def polinomiosInterpoladores(list_x,f):
     for i in range(len(list_x)):
         p_inter_n  += f.subs({'x':list_x[i]})*p_Lagrange[i]
     return p_inter_n
-interval = [0,math.pi/4]
-def plotPolLagrange():
-    polinomios =[]
-    for i in interval:
-        polinomios.append([])
-    x_axis =np.arange(0,math.pi/4,math.pi/400)
-    for i in x_axis:
-        polinomios_L = polinomiosLagrange(i,interval)
-        for i in range(len(polinomios_L)):
-            polinomios[i].append(polinomios_L[i])
-    for i,e in enumerate(polinomios):
-        plt.plot(x_axis,e,label="{}".format(i))
-def plotPolInter():
-    polinomios_Int = []
-    x_axis = np.arange(0, math.pi / 4, math.pi / 400)
-    for i in x_axis:
-        polinomios_Int.append(polinomiosInterpoladores(i, interval,sin(3*x)))
-    print(polinomios_Int)
-    plt.plot(x_axis, polinomios_Int, label="Polinomio Interpolador")
-plotPolInter()
-plt.show()
+
+def plotPolLagrange(interval):
+
+
+
+    polinomios_L = polinomiosLagrange(interval)
+
+
+    plot = compoundFunctions(polinomios_L,interval)
+    plot.show()
+
+def plotPolInter(interval,func):
+
+
+    polinomios_Int = polinomiosInterpoladores( interval,sin(3*x))
+    compoundFunctions([func,polinomios_Int],interval).show()
+
+def compoundFunctions(list,interval):
+    plots =[]
+    for e in list:
+
+        plots.append(plot(e,(x,interval[0],interval[-1]), show = False))
+    first = plots[0]
+    plots.remove(first)
+    for e in plots:
+        first.extend(e)
+    return first
+
+plotPolInter([0,math.pi/4],sin(3*x))
+plotPolLagrange([0,math.pi/4])
+plotPolLagrange([0,math.pi/8,math.pi/4])
+plotPolInter([0,math.pi/8,math.pi/4],sin(3*x))
+interval = np.arange(0,2,1/2)
+f = exp(-x)+cos(4*x/math.pi)
+
+plotPolLagrange(interval)
+plotPolInter(interval,f)
+#plt.show()
 #print(polinomiosInterpoladores(interval,sin(3*x)))
