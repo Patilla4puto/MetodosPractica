@@ -51,14 +51,20 @@ def compoundFunctions(list,interval):
         first.extend(e)
     return first
 
-plotPolInter([0,math.pi/4],sin(3*x))
+
 plotPolLagrange([0,math.pi/4])
-plotPolLagrange([0,math.pi/8,math.pi/4])
-plotPolInter([0,math.pi/8,math.pi/4],sin(3*x))
-interval = np.arange(0,2,1/2)
+plotPolInter([0,math.pi/4],sin(3*x))
+
+interval = np.arange(0,2,1)
+interval2 =np.arange(0,2,2/3)
+interval3 = np.arange(0,2,1/2)
 f = exp(-x)+cos(4*x/math.pi)
 
 plotPolLagrange(interval)
 plotPolInter(interval,f)
-#plt.show()
-#print(polinomiosInterpoladores(interval,sin(3*x)))
+
+plotPolLagrange(interval2)
+plotPolInter(interval2,f)
+
+plotPolLagrange(interval3)
+plotPolInter(interval3,f)
