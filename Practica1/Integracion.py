@@ -1,66 +1,52 @@
-import numpy as np
-import math
-
 from sympy import *
-from matplotlib import pyplot as plt
-x = symbols('x ')
+import math
+x = Symbol('x')
 
-def rectangulo(f,sop):
-    d = sop[1]-sop[0]
-    l = [f.subs({'x':sop[0]})*d,f.subs({'x':sop[1]})*d,f.subs({'x':(sop[0]+sop[1])/2})*d]
-    return l
+#1.- FÓRMULAS RECTANGULARES
+def fRectanguloExtIzdo(f,a,b):
+    return f.subs(x,a)*(b-a)
+def fRectanguloExtDcho(f,a,b):
+    return f.subs(x,b)*(b-a)
+def fRectanguloMedio(f,a,b):
+    return f.subs(x,(a+b)/2)*(b-a)
 
-def trapecio(f,sop):
-    return (sop[1]-sop[0])*(f.subs({'x':sop[0]})+f.subs({'x':sop[1]}))/2
+#2.- FÓRMULA DEL TRAPECIO
+def fTrapecio(f,a,b):
+    return (b-a)*(f.subs(x,a)+f.subs(x,b))/2
 
-def Simpson(f,sop):
-    return(sop[1]-sop[0])*(f.subs({'x':sop[0]})+4*f.subs({'x':(sop[0]+sop[1])/2})+f.subs({'x':sop[1]}))/6
+#3.- FÓRMULA DE SIMPSON 1/3
+def fSimpson(f,xi):  #xi es el conjunto de puntos (3) [x0,x1,x2]
+    D = 6
+    c = [1,4,1]
+    ret = 0
+    for i in range(3):
+        ret += c[i]*f.subs(x,xi[i])
+    return ret*(xi[2]-xi[0])/D
 
-def plotRectangle(f,sop):
-    nums = rectangulo(f,sop)
-    sopExtnd = np.arange(sop[0],sop[1],(sop[1]-sop[0])/100)
-    function = []
-    for i in sopExtnd:
-        function.append(f.subs({'x':i}))
-    result = f.integrate((x,0,2*pi))
-    plt.plot(sopExtnd,function, label ="funcion real: {}".format(float(result)))
-    puntoM= float(f.subs({'x':(sop[0]+sop[1])/2}))
-    plt.plot(sop,[float(f.subs({'x':sop[0]})),float(f.subs({'x':sop[0]}))],label = 'extremo izquierdo: {}'.format(float(nums[0])))
-    plt.plot(sop, [float(f.subs({'x':sop[1]})),float(f.subs({'x':sop[1]}))], label='extremo derecho: {}'.format(float(nums[1])))
-    plt.plot(sop, [puntoM, puntoM], label='punto medio: {}'.format(float(nums[2])))
-    plt.legend()
-    plt.show()
+#A (NO SE A QUE EJEMPLO HACER REFERENCIA)
 
-def plottrapecio(f,sop):
-    num = trapecio(f,sop)
-    sopExtnd = np.arange(sop[0],sop[1],(sop[1]-sop[0])/100)
-    function = []
-    for i in sopExtnd:
-        function.append(f.subs({'x':i}))
-    result = f.integrate((x,0,2*pi))
-    plt.plot(sopExtnd,function, label ="funcion real: {}".format(float(result)))
-    plt.fill_between(sop,[float(f.subs({'x':sop[0]})),float(f.subs({'x':sop[1]}))],label = 'Trapecio: {}'.format(float(num)),alpha =0.1)
-
-    plt.legend()
-    plt.show()
-
-def plotSimpson(f,sop):
-    num = Simpson(f, sop)
-    sopExtnd = np.arange(sop[0], sop[1], (sop[1] - sop[0]) / 100)
-    function = []
-    for i in sopExtnd:
-        function.append(f.subs({'x': i}))
-    result = f.integrate((x, 0, 2 * pi))
-    plt.plot(sopExtnd, function, label="funcion real: {}".format(float(result)))
-
-    plt.plot(sop, [float(f.subs({'x': sop[0]})), float(f.subs({'x': sop[1]}))],
-             label='Simpson: {}'.format(float(num)))
-
-    plt.legend()
-    plt.show()
-
-f = cos(x**2-1)
-interval = [0, 2*math.pi]
-plotRectangle(f,interval)
-plottrapecio(f,interval)
-plotSimpson(f,interval)
+#B
+g = x**3-2*x**2+1
+f= cos(x**2-1)
+a = 0
+b = math.pi*2
+xi = [0,math.pi,math.pi*2]
+print("FORMULA RECTANGULO EXTREMO DERECHO")
+print(N(fRectanguloExtDcho(g,a,b)))
+print(N(fRectanguloExtDcho(f,a,b)))
+print("FORMULA RECTANGULO EXTREMO IZQUIERDO")
+print(N(fRectanguloExtIzdo(g,a,b)))
+print(N(fRectanguloExtIzdo(f,a,b)))
+print("FORMULA RECTANGULO PUNTO MEDIO")
+print(N(fRectanguloMedio(g,a,b)))
+print(N(fRectanguloMedio(f,a,b)))
+print("FORMULA TRAPECIO")
+print(N(fTrapecio(g,a,b)))
+print(N(fTrapecio(f,a,b)))
+print("FORMULA SIMPSON 1/3")
+print(N(fSimpson(g,xi)))
+print(N(fSimpson(f,xi)))
+print("INTEGRAL CON FUNCION TRAPZ")
+print("1:{}".format(N(integrate(g,(x,a,b)))))
+print("2:{}".format(N(integrate(f,(x,a,b)))))
+#   QUEDAN LOS ERRORES RELATIVOS JEJE
