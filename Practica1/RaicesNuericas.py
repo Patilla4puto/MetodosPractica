@@ -17,7 +17,7 @@ def bissecion(f,x0,x1,e):
         elif f.subs(x,x_new)* f.subs(x,x1) > 0:
             x1 = x_new
             x_new = (x1 - x0) / 2 + x0
-    print(x0,x1)
+
     return x_new
 def newtonRa(f,x0):
     derivada =diff(f,x)
