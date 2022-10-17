@@ -97,18 +97,17 @@ h = cos(x) - x*sin(x)
 print(N(integrate(h, (x, 1, 3))))
 a = 1
 b = 3
-for i in range(1, 100):
+for i in range(1, 7):
     x_1 = a
     x_2 = b
-    sol = 0
     aux = 2**(i-1)
     inc = (x_2-x_1)/aux
     x_2 = x_1 + inc
-    arr1 = []
+    sol = []
     for j in range(aux):
         arr = np.arange(x_1, x_2 + (x_2-x_1)/4, (x_2-x_1)/4)
         x_1 = x_2
         x_2 = x_1 + inc
         s1, es1 = fMilne(h, arr)
-        arr1.append(s1)
-    print('It {}: {}'.format(i, sum(arr1)))
+        sol.append(s1)
+    print('It {}: solución {} error {}'.format(i, sum(sol), N(integrate(h, (x, 1, 3))) - sum(sol)))
