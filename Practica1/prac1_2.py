@@ -1,5 +1,6 @@
 #import matplotlib.pyplot as plt
 import numpy
+import numpy as np
 from sympy import *
 import math
 from sympy.plotting import plot
@@ -36,6 +37,17 @@ def fSimpson(f,xi):  #xi es el conjunto de puntos (3) [x0,x1,x2]
         ret += c[i]*f.subs(x,xi[i])
     sol = N(ret*(xi[2]-xi[0])/D)
     return sol, abs(sol-a) / a
+
+#4.- FÓRMULA DE MILNE
+def fMilne(f, xi):
+    a = N(integrate(f, (x, xi[0], xi[4])))
+    D = 90
+    c = [7, 32, 12, 32, 7]
+    ret = 0
+    for i in range(5):
+        ret += c[i] * f.subs(x, xi[i])
+    sol = N(ret * (xi[4] - xi[0]) / D)
+    return sol, abs(sol - a) / a
 
 #A (NO SE A QUE EJEMPLO HACER REFERENCIA)
 g = x**3 - 2*x**2 + 1
@@ -79,3 +91,24 @@ print(s4, es4)
 print("B) FORMULA SIMPSON 1/3")
 s5, es5 = fSimpson(f,xi)
 print(s5, es5)
+
+#C
+h = cos(x) - x*sin(x)
+print(N(integrate(h, (x, 1, 3))))
+a = 1
+b = 3
+for i in range(1, 100):
+    x_1 = a
+    x_2 = b
+    sol = 0
+    aux = 2**(i-1)
+    inc = (x_2-x_1)/aux
+    x_2 = x_1 + inc
+    arr1 = []
+    for j in range(aux):
+        arr = np.arange(x_1, x_2 + (x_2-x_1)/4, (x_2-x_1)/4)
+        x_1 = x_2
+        x_2 = x_1 + inc
+        s1, es1 = fMilne(h, arr)
+        arr1.append(s1)
+    print('It {}: {}'.format(i, sum(arr1)))
