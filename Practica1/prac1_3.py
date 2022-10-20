@@ -16,14 +16,16 @@ def metodo_Biseccion(f, a, b, epsilon, ite=0):  # f es la funcion, a es el punto
 
 
 # 1.- MÉTODO NEWTON-RAPHSON
-def metodo_NewtonRaphson(f, x_m, epsilon, x_n, ite=0):  # f es la funcion, a es el punto a la izda y b el punto a la derecha (importante f(a) y f(b) deben ser de signo opuesto)
-    if (abs(x_m - x_n) < epsilon):
+def metodo_NewtonRaphson(f, x_m, epsilon, x_n, ite=0,limit =-1):  # f es la funcion, a es el punto a la izda y b el punto a la derecha (importante f(a) y f(b) deben ser de signo opuesto)
+    if ((abs(x_m - x_n) < epsilon) or limit == 0):
         return x_m, ite
     else:
         f_x = sympy.diff(f, x)
         x_Nuevo = x_m - (f.subs(x, x_m) / f_x.subs(x, x_m))
-        # print(sympy.N(f.subs(x,x_Nuevo)))
-        return metodo_NewtonRaphson(f, x_Nuevo, epsilon, x_m, ite + 1)
+        if(limit < 0):
+            return metodo_NewtonRaphson(f,  sympy.N(x_Nuevo), epsilon, x_m, ite + 1)
+        else:
+            return metodo_NewtonRaphson(f, sympy.N(x_Nuevo), epsilon, x_m, ite + 1,limit -1)
 
 def metodo_Secante(f, x_n, x_m, epsilon, ite = 0):
     if(abs(x_n - x_m) < epsilon):
@@ -32,11 +34,21 @@ def metodo_Secante(f, x_n, x_m, epsilon, ite = 0):
         x_Nuevo = x_n - f.subs(x, x_n)*((x_n-x_m)/(f.subs(x, x_n) - f.subs(x, x_m)))
         return metodo_Secante(f, x_Nuevo, x_n, epsilon, ite + 1)
 
-
+def conv_NewtonRapshon(f,x_m,epsilon,limit):
+    aux=metodo_NewtonRaphson(f,x_m,epsilon,x_m+2*epsilon,limit=limit)
+    aux1 = metodo_NewtonRaphson(f,x_m,epsilon,x_m+2*epsilon,limit=limit+1)
+    e_n = aux[0]-x_m
+    e_n1= aux1[0]-x_m
+    k=[]
+    for i in range(1,4):
+        k.append(abs(e_n1)/(abs(e_n)**i))
+    return aux[0],e_n,k
 
 print("******1******")
 f = x * sympy.sin(0.5 * x ** 2) + sympy.exp(-x)
-# print("sol:{}  (n:{})".format(sympy.N(metodo_NewtonRaphson(f,1,0.01,0)))) #Si pones 0 parece que no converge, si pones 10 si, si pintas la funcion sube y baja. probablemente te de la raiz mas cercana a la derecha del punto seleccionado
+aux = metodo_NewtonRaphson(f,1,0.01,0)
+print("sol:{}  (n:{})".format(sympy.N(aux[0]),aux[1])) #Si pones 0 parece que no converge, si pones 10 si, si pintas la funcion sube y baja. probablemente te de la raiz mas cercana a la derecha del punto seleccionado
+#print("Rsol:{}".format(sympy.solve(f) )) No funciona
 print("******2.1******")
 # 2.1
 f = sympy.sin(x) - 0.3 * sympy.exp(x)
@@ -114,3 +126,12 @@ print("sol:{},{}  (n:{})".format(sympy.N(aux[0]), f.subs(x, sympy.N(aux[0])), au
 # 2.5 c) Secante
 aux = metodo_Secante(f_1, -1.5, 1.5, 0.001)
 print("sol:{},{}  (n:{})".format(sympy.N(aux[0]), f.subs(x, sympy.N(aux[0])), aux[1]))
+
+f = x**3 - 3*x + 2
+
+for i in range(1,7):
+    print("********n={}********".format(i))
+    aux = conv_NewtonRapshon(f, -3, 1e-6, i)
+    print("sol: {} , E_N: {}  ".format(sympy.N(aux[0]) ,sympy.N(aux[1])))
+    for j,e in enumerate(aux[2]):
+        print("k{}:  {}".format(j,sympy.N(e)))
