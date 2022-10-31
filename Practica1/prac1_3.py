@@ -21,8 +21,8 @@ def metodo_Biseccion(f, a, b, epsilon, ite=0):  # f es la funcion, a es el punto
 
 
 # 1.- MÉTODO NEWTON-RAPHSON
-def metodo_NewtonRaphson(f, x_m, epsilon, ite=1,limit =-1): 
-    
+def metodo_NewtonRaphson(f, x_m, epsilon, ite=1,limit =-1):
+
     #Derivamos la funcion
     f_x = sympy.diff(f, x)
     x_Nuevo = x_m - (f.subs(x, x_m) / f_x.subs(x, x_m)) #CALCULO DEL NUEVO
@@ -44,12 +44,35 @@ def metodo_Secante(f, x_n, x_m, epsilon, ite = 0):
         x_Nuevo = x_n - f.subs(x, x_n)*((x_n-x_m)/(f.subs(x, x_n) - f.subs(x, x_m)))
         return metodo_Secante(f, x_Nuevo, x_n, epsilon, ite + 1)
 
-def conv_NewtonRapshon(f,x_m,epsilon,limit):
-    aux=metodo_NewtonRaphson(f,x_m,epsilon,x_m+2*epsilon,limit=limit)
-    aux1 = metodo_NewtonRaphson(f,x_m,epsilon,x_m+2*epsilon,limit=limit+1)
-    e_n = aux[0]-x_m
-    e_n1= aux1[0]-x_m
+# 3.- METODO DE CONVERGENCIA DE NEWTON-RAPSHON
+"""
+Metodo auxiliar que recibe la funcion a analizar (f),el punto de partida (x_m), el epsilon
+para comprobar convergencia(epsilon), el limite de iteraciones(limit) y la raiz real de la 
+función y devuelve el resultado del metodo NEWTON-RAPSHON, el error absoluto del metodo y
+las constantes de convergencia con ordenes del 1 al 3 aplicando el metodo hasta la iteracion limit 
+"""
+def conv_NewtonRapshon(f,x_m,epsilon,limit,x_0):
+
+    if(limit>0):
+        #SI limit NO ES 0,APLICAMOS NEWTON_RAPSON HASTA LA ITERACION limit(n)
+        aux=metodo_NewtonRaphson(f,x_m,epsilon,limit=limit)
+        """
+        Haciendo limit =limit, basicamente estamos especificando que la variable
+        limit independientemente de donde se declarese en la cabecera de la funcion
+         metodo_NewtonRaphson tenga valor limit
+        """
+    else:
+        # SI limit ES CERO, ENTONCES X_N=x_m
+        aux=[x_m]
+    #VALOR DEVUELTO POR NEWTON_RAPSON EN LA ITERACION limit(n+1)
+    aux1 = metodo_NewtonRaphson(f,x_m,epsilon,limit=limit+1)
+
+    #ERRORES E_n y E_n+1
+    e_n = aux[0]-x_0
+    e_n1= aux1[0]-x_0
+
     k=[]
+    #ALMACENAMOS LOS K SEGUN la k
     for i in range(1,4):
         k.append(abs(e_n1)/(abs(e_n)**i))
     return aux[0],e_n,k
@@ -205,11 +228,18 @@ aux = metodo_Secante(f_1, -1.5, 1.5, 0.001)
 print("sol:{},{}  (n:{})".format(sympy.N(aux[0]), f.subs(x, sympy.N(aux[0])), aux[1]))
 
 f = x**3 - 3*x + 2
-'''
-for i in range(1,7):
+#TABLA DE LA CONVERGENCIA DE NEWTON RAPSHON SEGUN EL NUMERO DE ITERACIONES
+for i in range(0,5): #BUCLE ENTRE sobre (0,1,2,3,4) MARCANDO EL NUMERO DE ITERACION
     print("********n={}********".format(i))
-    aux = conv_NewtonRapshon(f, -3, 1e-6, i)
-    print("sol: {} , E_N: {}  ".format(sympy.N(aux[0]) ,sympy.N(aux[1])))
-    for j,e in enumerate(aux[2]):
+    aux = conv_NewtonRapshon(f, -3, 1e-6, i,-2)#METODO QUE DEVUELVE LOS VALORES DE K yE_N
+
+    print("sol: {} , E_N: {}  ".format(sympy.N(aux[0]) ,sympy.N(aux[1])))#RESULTADO EN LA ITERACION i
+    # DEL METODO NEWTON-RAPSHON Y EL ERROR COMETIDO
+
+    for j,e in enumerate(aux[2]):#ITERACION POR VALOR E INDICE SOBRE UN ARRAY CON LAS K
+        # SEGUN EL VALOR DE k
         print("k{}:  {}".format(j,sympy.N(e)))
-'''
+
+#CALCULO DE LA K REAL PARA EL METODO NEWTON-RAPSHON
+f1=sympy.diff(f, x)
+print("K (with k=2):",abs(1/2*sympy.diff(f1, x).subs(x,-2)/f1.subs(x,-2)))
