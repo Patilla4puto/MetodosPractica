@@ -70,16 +70,20 @@ def Gauss_Seidel(A,b,x_0,e):
 
     return x_k
 
-A = np.array([[3,-0.1,-0.2],[0.1,7,-0.3],[0.3,-0.2,10]])#creacion de la matriz de coeficientes
-b= np.array([7.85,-19.3,71.4])#Resultados de las ecuaciones
-x_0 = np.zeros(3) #Vector de soluciones inicial(vector nulo de tamaño 3)
-print("********Apartado 1**********")
-print("Sol:",Gauss_Seidel(A,b,x_0,1e-1))
-print("Sol:",jacobi(A,b,x_0,1e-1),"\n")
-A = np.array([[5,2,-1,1],[1,7,3,-1],[-1,4,9,2],[1,-1,1,4]])#creacion de la matriz de coeficientes
-b =np.array([12,2,1,3])#Resultados de las ecuaciones
-x_0 = np.zeros(4)#Vector de soluciones inicial
-print("********Apartado 2**********")
-print("Sol:",Gauss_Seidel(A,b,x_0,1e-1))
-print("Sol:",jacobi(A,b,x_0,1e-1))
+
+if __name__ == "__main__": #
+    A = np.array([[3,-0.1,-0.2],[0.1,7,-0.3],[0.3,-0.2,10]])#creacion de la matriz de coeficientes
+    b= np.array([7.85,-19.3,71.4])#Resultados de las ecuaciones
+    x_0 = np.zeros(3) #Vector de soluciones inicial(vector nulo de tamaño 3)
+    print("********Apartado 1**********")
+    print("Sol:",Gauss_Seidel(A,b,x_0,1e-1))
+    print("Sol:",jacobi(A,b,x_0,1e-1),"\n")
+
+
+    A = np.array([[5,2,-1,1],[1,7,3,-1],[-1,4,9,2],[1,-1,1,4]])#creacion de la matriz de coeficientes
+    b =np.array([12,2,1,3])#Resultados de las ecuaciones
+    x_0 = np.zeros(4)#Vector de soluciones inicial
+    print("********Apartado 2**********")
+    print("Sol:",Gauss_Seidel(A,b,x_0,1e-1))
+    print("Sol:",jacobi(A,b,x_0,1e-1))
 
