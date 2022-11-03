@@ -199,8 +199,8 @@ print("sol:{}  (n:{})".format(sympy.N(aux[0]), aux[1]))
 # 2.4
 print("******2.4******")
 f = sympy.exp(1 / 2 * x) + 5 * x - 5
-p1 = sympy.plot(f, (x, 0, 5), line_color='red', show=False)
-p1.show()
+#p1 = sympy.plot(f, (x, 0, 5), line_color='red', show=False)
+#p1.show()
 # 2.4 a)biseccion
 print("a)")
 aux = metodo_Biseccion(f, 0, 4, 0.001)
@@ -213,6 +213,10 @@ print("******2.5******")
 f = x ** 2 + x + 3
 f_1 = f.diff()
 print(f_1)
+p1 = sympy.plot(f, (x, -5, 5), line_color='red', show=False)
+p1.show()
+p1 = sympy.plot(f_1, (x, -5, 5), line_color='red', show=False)
+p1.show()
 # 2.5 a)biseccion
 print("a)")
 aux = metodo_Biseccion(f_1, -2, 2, 0.001)
