@@ -1735,66 +1735,66 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|1|2>>
-    <associate|auto-10|<tuple|5|4>>
-    <associate|auto-11|<tuple|6|5>>
-    <associate|auto-12|<tuple|7|5>>
-    <associate|auto-13|<tuple|8|5>>
-    <associate|auto-14|<tuple|9|6>>
-    <associate|auto-15|<tuple|10|6>>
-    <associate|auto-16|<tuple|2|6>>
-    <associate|auto-17|<tuple|2.1|6>>
-    <associate|auto-18|<tuple|2.2|7>>
-    <associate|auto-19|<tuple|2.3|7>>
-    <associate|auto-2|<tuple|1.1|2>>
-    <associate|auto-20|<tuple|2.4|8>>
-    <associate|auto-21|<tuple|2.5|8>>
-    <associate|auto-22|<tuple|11|8>>
-    <associate|auto-23|<tuple|3|10>>
-    <associate|auto-24|<tuple|3.1|10>>
-    <associate|auto-25|<tuple|3.2|11>>
-    <associate|auto-26|<tuple|3.3|11>>
-    <associate|auto-27|<tuple|12|12>>
-    <associate|auto-28|<tuple|13|12>>
-    <associate|auto-29|<tuple|3.4|13>>
-    <associate|auto-3|<tuple|1.2|2>>
-    <associate|auto-30|<tuple|3.5|13>>
-    <associate|auto-31|<tuple|3.6|13>>
-    <associate|auto-32|<tuple|3.7|14>>
-    <associate|auto-33|<tuple|14|14>>
-    <associate|auto-34|<tuple|4|15>>
-    <associate|auto-35|<tuple|4.1|15>>
-    <associate|auto-36|<tuple|15|15>>
-    <associate|auto-37|<tuple|4.2|16>>
-    <associate|auto-38|<tuple|16|16>>
-    <associate|auto-39|<tuple|4.3|17>>
-    <associate|auto-4|<tuple|1.3|3>>
-    <associate|auto-40|<tuple|17|17>>
-    <associate|auto-41|<tuple|4.4|18>>
-    <associate|auto-42|<tuple|18|18>>
-    <associate|auto-43|<tuple|4.5|18>>
-    <associate|auto-44|<tuple|19|19>>
-    <associate|auto-45|<tuple|20|19>>
-    <associate|auto-46|<tuple|5|20>>
-    <associate|auto-47|<tuple|5.1|20>>
-    <associate|auto-48|<tuple|5.2|20>>
-    <associate|auto-49|<tuple|1|21>>
-    <associate|auto-5|<tuple|1|3>>
-    <associate|auto-50|<tuple|6|22>>
-    <associate|auto-51|<tuple|6.1|22>>
-    <associate|auto-52|<tuple|1|22>>
-    <associate|auto-53|<tuple|2|23>>
-    <associate|auto-54|<tuple|6.2|24>>
-    <associate|auto-55|<tuple|2|24>>
-    <associate|auto-56|<tuple|3|24>>
-    <associate|auto-57|<tuple|4|25>>
-    <associate|auto-58|<tuple|5|25>>
-    <associate|auto-59|<tuple|6|25>>
-    <associate|auto-6|<tuple|2|3>>
-    <associate|auto-60|<tuple|7|25>>
-    <associate|auto-7|<tuple|3|4>>
-    <associate|auto-8|<tuple|4|4>>
-    <associate|auto-9|<tuple|1.4|4>>
+    <associate|auto-1|<tuple|1|3>>
+    <associate|auto-10|<tuple|5|5>>
+    <associate|auto-11|<tuple|6|6>>
+    <associate|auto-12|<tuple|7|6>>
+    <associate|auto-13|<tuple|8|6>>
+    <associate|auto-14|<tuple|9|7>>
+    <associate|auto-15|<tuple|10|7>>
+    <associate|auto-16|<tuple|2|8>>
+    <associate|auto-17|<tuple|2.1|8>>
+    <associate|auto-18|<tuple|2.2|8>>
+    <associate|auto-19|<tuple|2.3|9>>
+    <associate|auto-2|<tuple|1.1|3>>
+    <associate|auto-20|<tuple|2.4|9>>
+    <associate|auto-21|<tuple|2.5|10>>
+    <associate|auto-22|<tuple|11|10>>
+    <associate|auto-23|<tuple|3|12>>
+    <associate|auto-24|<tuple|3.1|12>>
+    <associate|auto-25|<tuple|3.2|12>>
+    <associate|auto-26|<tuple|3.3|13>>
+    <associate|auto-27|<tuple|12|13>>
+    <associate|auto-28|<tuple|13|14>>
+    <associate|auto-29|<tuple|3.4|14>>
+    <associate|auto-3|<tuple|1.2|3>>
+    <associate|auto-30|<tuple|3.5|14>>
+    <associate|auto-31|<tuple|3.6|15>>
+    <associate|auto-32|<tuple|3.7|16>>
+    <associate|auto-33|<tuple|14|16>>
+    <associate|auto-34|<tuple|4|18>>
+    <associate|auto-35|<tuple|4.1|18>>
+    <associate|auto-36|<tuple|15|18>>
+    <associate|auto-37|<tuple|4.2|19>>
+    <associate|auto-38|<tuple|16|19>>
+    <associate|auto-39|<tuple|4.3|20>>
+    <associate|auto-4|<tuple|1.3|4>>
+    <associate|auto-40|<tuple|17|20>>
+    <associate|auto-41|<tuple|4.4|21>>
+    <associate|auto-42|<tuple|18|21>>
+    <associate|auto-43|<tuple|4.5|22>>
+    <associate|auto-44|<tuple|19|22>>
+    <associate|auto-45|<tuple|20|22>>
+    <associate|auto-46|<tuple|5|24>>
+    <associate|auto-47|<tuple|5.1|24>>
+    <associate|auto-48|<tuple|5.2|24>>
+    <associate|auto-49|<tuple|1|25>>
+    <associate|auto-5|<tuple|1|4>>
+    <associate|auto-50|<tuple|6|26>>
+    <associate|auto-51|<tuple|6.1|26>>
+    <associate|auto-52|<tuple|1|26>>
+    <associate|auto-53|<tuple|2|27>>
+    <associate|auto-54|<tuple|6.2|28>>
+    <associate|auto-55|<tuple|2|28>>
+    <associate|auto-56|<tuple|3|28>>
+    <associate|auto-57|<tuple|4|29>>
+    <associate|auto-58|<tuple|5|29>>
+    <associate|auto-59|<tuple|6|29>>
+    <associate|auto-6|<tuple|2|4>>
+    <associate|auto-60|<tuple|7|29>>
+    <associate|auto-7|<tuple|3|5>>
+    <associate|auto-8|<tuple|4|5>>
+    <associate|auto-9|<tuple|1.4|5>>
   </collection>
 </references>
 
@@ -2019,13 +2019,13 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-46><vspace|0.5fn>
 
-      <with|par-left|<quote|1tab>|5.1<space|2spc>Presentacion de la
-      covergencia del metodo Newton-Rapshon
+      <with|par-left|<quote|1tab>|5.1<space|2spc>Presentación de la
+      convergencia del método Newton-Rapshon
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-47>>
 
-      <with|par-left|<quote|1tab>|5.2<space|2spc>Convergencia para f(x) =
-      <with|mode|<quote|math>|x<rsup|3>-3x+2> y
+      <with|par-left|<quote|1tab>|5.2<space|2spc>Convergencia para
+      <with|mode|<quote|math>|f<around*|(|x|)>=x<rsup|3>-3x+2> y
       <with|mode|<quote|math>|x<rsub|0>=-3>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-48>>
