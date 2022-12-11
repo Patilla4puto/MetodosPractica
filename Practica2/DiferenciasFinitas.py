@@ -35,7 +35,7 @@ def Gauss_Seidel(A,b,x_0,e):
 
 
 # coef = [D, v, q]
-def difFinitas(star,stop,step,coef,f_x,u_0,u_n):
+def condicionesContorno(star, stop, step, coef, f_x, u_0, u_n):
     alpha = -coef[0]/step**2-coef[1]/(2*step)
     beta = 2*coef[0]/step**2+coef[2]
     gamma =  -coef[0]/step**2+coef[1]/(2*step)
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     u_0 = 0
     u_n = 1
     f_x = 0*x
-    sol_aprox, inter = difFinitas(0, 1, 0.5, coef, f_x, u_0, u_n)
+    sol_aprox, inter = condicionesContorno(0, 1, 0.5, coef, f_x, u_0, u_n)
     f_real = (exp(x)-1)/(exp(1)-1)
     sol_real = [0, N(f_real.subs({'x':0.5})), 1]
     error_relativo = abs(sol_aprox[1] - sol_real[1])
@@ -95,9 +95,10 @@ if __name__ == '__main__':
     t_n = 200
     for i in range(10):
         step = 10/(i+2)
-        sol_aprox, inter = difFinitas(0, 10, step, coef, f_x, t_0, t_n)
+        sol_aprox, inter = condicionesContorno(0, 10, step, coef, f_x, t_0, t_n)
         print(sol_aprox, inter)
         plt.plot(inter, sol_aprox, label="aproximada")
         plt.legend()
         plt.show()
 
+ 
