@@ -54,9 +54,7 @@ def Gauss_Seidel(A,b,x_0,e):
     k=1
     x_k= np.copy(x_0)
     while(not convergencia(e,x_k1,x_k)):
-
         x_k1=np.copy(x_k)
-
         for i in range(len(x_0)):
             aux = b[i]
             for j  in range(len(x_0)):
