@@ -24,7 +24,8 @@ def eulerExplicito(start,stop,step,f,y0):
     return(y_list,sop)
 
 def eulerExplicito2Orden(start,stop,step, fu, fv,u0, v0):
-    sop = np.arange(start,stop+step,step)
+    sop = np.arange(start,stop+step/2,step)
+    print(sop)
     u_list=[u0]
     v_list=[v0]
     for i in range(len(sop)-1):
