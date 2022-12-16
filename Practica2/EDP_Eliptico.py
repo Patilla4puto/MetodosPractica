@@ -75,6 +75,7 @@ def elipctica(paso,start,stop):
 
     n = abs(start - stop) / paso + 1            #Obtenemos el numero de puntos
     A,b = matriz(n,paso)                        #Obtenemos la matriz A y el vector b de la función que hemos definido al principio
+
     xi_j= np.zeros(int(n*n))                    #Inicializamos el vector x_i_j con 0's
     return(Gauss_Seidel(A,b,xi_j,1e-4),int(n))  #Resolvemos con Gauss-Seidel el sistema A*x_i_j=b y devolvemos el resultado
 start,stop =-1,1
