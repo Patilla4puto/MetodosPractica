@@ -24,8 +24,7 @@ def eulerExplicito(start,stop,step,f,y0):
     return(y_list,sop)
 
 def eulerExplicito2Orden(start,stop,step, fu, fv,u0, v0):
-    sop = np.arange(start,stop+step/2,step)
-    print(sop)
+    sop = np.arange(start,stop+step-0.001,step)
     u_list=[u0]
     v_list=[v0]
     for i in range(len(sop)-1):
@@ -92,7 +91,6 @@ if __name__ == '__main__':
     rungeR = rungeKuta2(0,1,0.5,h,1,1/3)
     l =[0,0.5,1]
     real2=[h_s.subs({'x':t}) for t in l]
-    print(real)
     plt.plot(l,rungeHeun,label="Heun")
     plt.plot(l,rungePm,label="Punto Medio")
     plt.plot(l,rungeR,label="Ralston")
@@ -116,17 +114,39 @@ if __name__ == '__main__':
     # hacemos Euler explícito tal que
     M = 10
     B = 50
-    k = 2000
+    k = 200
     u_0 = 0
     v_0 = 1
     f_u = v
     f_v = (-1/M)*(B*abs(v)*v+k*u)
 
     u_sol, v_sol, sop = eulerExplicito2Orden(0, 0.1, 0.05, f_u, f_v, u_0, v_0)
-    print(u_sol, v_sol, sop)
     plt.plot(sop, u_sol, label='u')
     plt.plot(sop, v_sol, label='u\'')
     plt.title("EDO de orden 2 por Euler Explícito")
+    plt.legend()
+    plt.show()
+    u_sol_ant, v_sol_ant, sop = eulerExplicito2Orden(0, 0.1, 1/90, f_u, f_v, u_0, v_0)
+    err = []
+    print(u_sol_ant, v_sol_ant, sop)
+    plt.plot(sop, u_sol_ant, label='u')
+    plt.plot(sop, v_sol_ant, label='u\'')
+    plt.title("EDO de orden 2 por Euler Explícito con step: {}".format(1 / 90))
+    plt.legend()
+    plt.show()
+    for i in range(100, 150, 10):
+        u_sol, v_sol, sop = eulerExplicito2Orden(0, 0.1, 1/i, f_u, f_v, u_0, v_0)
+        print(u_sol, v_sol, sop)
+        err.append(abs(u_sol_ant[1] - u_sol[1]))
+        u_sol_ant = u_sol
+        plt.plot(sop, u_sol, label='u')
+        plt.plot(sop, v_sol, label='u\'')
+        plt.title("EDO de orden 2 por Euler Explícito con step: {}".format(1/i))
+        plt.legend()
+        plt.show()
+    print(err)
+    plt.plot([1, 2, 3, 4, 5], err)
+    plt.title("Estudio de la convergencia")
     plt.legend()
     plt.show()
 
