@@ -40,7 +40,7 @@ def condicionesContorno(star, stop, step, coef, f_x, u_0, u_n):
     alpha = -coef[0]/step**2-coef[1]/(2*step)
     beta = 2*coef[0]/step**2+coef[2]
     gamma =  -coef[0]/step**2+coef[1]/(2*step)
-    inter = np.arange(star,stop+step,step)
+    inter = np.arange(star,stop+step-1/10**6,step)
     #Si tiene tamaño 3 sustituimos directamente
     if (len(inter) == 3):
         f_1 = f_x.subs({'x':inter[1]})
@@ -68,7 +68,6 @@ def condicionesContorno(star, stop, step, coef, f_x, u_0, u_n):
                 b.append(f_x.subs({'x':inter[i]}))
         #Inicializamos x_i
         u_arr = np.zeros(n)
-        print(A,b)
         #Devolvemos el resultado de resolver el sistema A*b=u_arr
         return Gauss_Seidel(A, b, u_arr, 1/1000), inter
 
@@ -81,20 +80,36 @@ if __name__ == '__main__':
     u_n = 1
     f_x = 0*x
 
-    #Solución real
-    f_real = (exp(x)-1)/(exp(1)-1)
+    # Apartado a
+    sol_aprox, inter = condicionesContorno(0, 1, 0.5, coef, f_x, u_0, u_n)
+    print("Solución apartado a): {}".format(sol_aprox))
+
+    # Apartado b
+    f_real = (exp(x) - 1) / (exp(1) - 1)
+    sol_real = [N(f_real.subs({'x': j})) for j in np.arange(0, 1 + 0.5, 0.5)]
+    print("Solución real: {}".format(sol_real))
+    error_relativo = abs(sol_aprox[1] - sol_real[1]) / sol_real[1]
+    print("Error relativo: {}".format(error_relativo))
+    error = []
     #Realizamos pruebas con pasos de discretización más pequeños para obserbar la convergencia
     for i in range(10):
         step = 1/(i+3)
         sol_aprox, inter = condicionesContorno(0, 1, step, coef, f_x, u_0, u_n)
-        sol_real = [N(f_real.subs({'x': j})) for j in np.arange(0, 1 + step, step)]
-        error_relativo = abs(sol_aprox[1] - sol_real[1]) / sol_real[1]
+        sol_real = [N(f_real.subs({'x': j})) for j in np.arange(0, 1 + step-1/10**6, step)]
+        error_por_punto = [abs(x - y) for x, y in zip(sol_aprox, sol_real)]
+        error_relativo = sum(error_por_punto)/len(error_por_punto)
+        error.append(error_relativo)
         print('Error: {}'.format(error_relativo))  # Mostramos el error relativo
         plt.plot(inter, sol_real, label="real")
         plt.plot(inter, sol_aprox, label="aproximada")
+        plt.title("Iteración {} con step {}".format(i, step))
         plt.legend()
         plt.show()
 
+    plt.plot(range(10), error)
+    plt.title("Evolución del error")
+    plt.legend()
+    plt.show()
     #Ejercicio 2
 
     #COo en el anterior definimos los  coeficientes que componen nuestro problema -D, V y q, las condiciones en los extremos y la f_x
@@ -110,5 +125,3 @@ if __name__ == '__main__':
         plt.plot(inter, sol_aprox, label="aproximada")
         plt.legend()
         plt.show()
-
- 
